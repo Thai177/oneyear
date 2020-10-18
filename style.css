@@ -5,6 +5,7 @@ body{
 }
 
 h2{
+    padding-top: 30px;
     text-align: center;
     font-weight: bold;
     font-size: 36px;
@@ -16,14 +17,14 @@ p{
     text-align: center;
     margin-top: 25px;
     margin-bottom: 50px;
-    margin-left: 12px;
+    margin-left: 44px;
     margin-right: 12px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 ul{
     position: fixed;
-    bottom:-25%;
+    bottom: 0%;
     left: 0;
     transform: translateY(-50%);
     margin: 0;
@@ -35,6 +36,52 @@ ul li{
     list-style: none;
 }
 
+#M3{
+    display: none;
+}
+
+.M3On{
+    display: initial;
+}
+
+#M4{
+    display: none;
+}
+
+#M5{
+    display: none;
+}
+
+#M6{
+    display: none;
+}
+
+#M7{
+    display: none;
+}
+
+#M8{
+    display: none;
+}
+
+#M9{
+    display: none;
+}
+
+#M10{
+    display: none;
+}
+
+#M11{
+    display: none;
+}
+
+#M12{
+    display: none;
+}
+
+
+
 ul li a{
     display: block;
     text-decoration: none;
@@ -44,7 +91,7 @@ ul li a{
     background: #fff;
     width: 40px;
     color: #262626;
-    margin: 4px 0;
+    margin: 14px 0;
     padding-left:2px;
     text-transform: uppercase;
     border-bottom-right-radius: 15px;
@@ -94,6 +141,42 @@ ul li a:hover{
     background: #C1E7E3;
 }
 
+#container div#section4{
+    background: #FFDFD3;
+}
+
+#container div#section5{
+    background: #C1E7E3;
+}
+
+#container div#section6{
+    background: #FFDFD3;
+}
+
+#container div#section7{
+    background: #FFF0D7;
+}
+
+#container div#section8{
+    background: #FFDFD3;
+}
+
+#container div#section9{
+    background: #95B4CC;
+}
+
+#container div#section10{
+    background: #95B4CC;
+}
+
+#container div#section11{
+    background: #FEC9C9;
+}
+
+#container div#section12{
+    background: #F9665E;
+}
+
 div.shadow {
     position:absolute;
     overflow:visible;
@@ -121,4 +204,84 @@ canvas {
     width: 85%;
     float: right;
     margin-right:7px;
+}
+
+#imgMiniGame2{
+    border: solid 1px black;
+    width: 80%!important;
+    height: 59%!important;
+    margin-right: 15px;
+    margin-bottom: 7px;
+    margin-top:60px;
+    float: right;
+    background-image: url("img/sprite_sheet/MiniGame2/bg.jpg");
+}
+
+#noimgMiniGame2{
+    border: solid 1px black;
+    width: 80%!important;
+    height: 59%!important;
+    margin-right: 15px;
+    margin-bottom: 7px;
+    margin-top:60px;
+    float: right;
+}
+
+.gameController {
+  text-align: center;
+  width: 59%!important;
+  bottom: -5%;
+  left: 35%;
+  height: 29%!important;
+}
+
+.gameButton{
+    width:70px;
+    height: 70px;
+}
+
+.downloadButton{
+    width:170px;
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 15px;
+    float: right;
+}
+
+.fixButton{
+    width:50px;
+    height: 30px;
+    margin-top: 120px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    float: right
+}
+
+#imgMiniGame3{
+    border: solid 1px black;
+    width: 65%!important;
+    height: 50%!important;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    margin-top:20px;
+    float: right;
+    background-image: url("img/sprite_sheet/MiniGame2/bg.jpg");
+}
+
+#noimgMiniGame3{
+    filter: blur(5px);
+    border: solid 1px black;
+    width: 65%!important;
+    height: 50%!important;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    margin-top:20px;
+    float: right;
+    background-image: url("img/sprite_sheet/MiniGame2/bg.jpg");
+}
+
+.miniGame4{
+    height: 0%!important;
+    width: 100px!important;
+    margin-right: 200px;;
 }
