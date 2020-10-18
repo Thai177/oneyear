@@ -180,8 +180,8 @@ ul li a:hover{
 div.shadow {
     position:absolute;
     overflow:visible;
-    top: 10%;
-    left: 15%;
+    top: 15%;
+    left: 16%;
 }
 
 img.logo {
@@ -269,7 +269,7 @@ canvas {
 }
 
 #noimgMiniGame3{
-    filter: blur(5px);
+    filter: blur(8px);
     border: solid 1px black;
     width: 65%!important;
     height: 50%!important;
