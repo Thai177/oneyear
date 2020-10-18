@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type ="text/css" href = "style.css">
+</head>
+<body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);" ontouchmove="BlockMove(event);">
+    <ul>
+        <li><a href="#section1">M1</a></li>
+        <li><a href="#section2" onClick="activateMiniGame(1)">M2</a></li>
+        <li><a href="#section3">M3</a></li>
+        <li><a href="#section4" onClick="activateMiniGame(2)">M4</a></li>
+        <li><a href="#section5">M5</a></li>
+        <li><a href="#section6" onClick="activateMiniGame(3)">M6</a></li>
+        <li><a href="#section7">M7</a></li>
+        <li><a href="#section8">M8</a></li>
+        <li><a href="#section9">M9</a></li>
+        <li><a href="#section10">M10</a></li>
+        <li><a href="#section11">M11</a></li>
+        <li><a href="#section12">M12</a></li>
+
+    </ul>
+
+    <div id="container">
+        <div id="section1">
+                <div class="shadow">
+                    <img class="logo" src="img/pictures/1.jpg"/>
+                    <img class="spotify" src="img/pictures/2.jpeg"/>
+                </div>
+        </div>
+
+        <div id="section2">
+        
+            <div class = "miniGame1">
+                <h2>Mini Game 1</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                     sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <canvas id = "canvas"></canvas>
+            </div>
+            
+        </div>
+
+        <div id="section3">
+            <div class="shadow">
+                <img class="logo" src="img/pictures/1.jpg"/>
+                <img class="spotify" src="img/pictures/2.jpeg"/>
+            </div>
+        </div>
+
+        <div id="section4">
+        
+            <div class = "miniGame1">
+                <h2>Mini Game 1</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <canvas id = "canvas1"></canvas>
+            </div>
+            
+        </div>
+
+        <div id="section5">
+            <div class="shadow">
+                <img class="logo" src="img/pictures/1.jpg"/>
+                <img class="spotify" src="img/pictures/2.jpeg"/>
+            </div>
+        </div>
+
+    <div id="section6">
+    
+        <div class = "miniGame1">
+            <h2>Mini Game 1</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                  Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <canvas id = "canvas2"></canvas>
+        </div>
+        
+    </div>
+
+    </div>
+</body>
+
+<script>
+    function BlockMove(event) {
+      // Tell Safari not to move the window.
+        event.preventDefault();
+    }
+
+
+
+        const SCALE = 2.5;
+        const WIDTH = 16;
+        const HEIGHT = 18;
+        const SCALED_WIDTH = SCALE * WIDTH;
+        const SCALED_HEIGHT = SCALE * HEIGHT;
+        const CYCLE_LOOP = [0, 1, 0, 2];
+        const FACING_DOWN = 0;
+        const FACING_UP = 1;
+        const FACING_LEFT = 2;
+        const FACING_RIGHT = 3;
+        const FRAME_LIMIT = 12;
+        const MOVEMENT_SPEED = 1;
+
+        var GameNr = 1;
+
+        let canvas = document.getElementById('canvas');
+        let canvas1 = document.getElementById('canvas1');
+        let canvas2 = document.getElementById('canvas2');
+        let ctx = canvas.getContext('2d');
+        let ctx1 = canvas1.getContext('2d');
+        let ctx2 = canvas2.getContext('2d');
+        let keyPresses = {};
+        let currentDirection = FACING_DOWN;
+        let currentLoopIndex = 0;
+        let frameCount = 0;
+        let positionX = 0;
+        let positionY = 0;
+        let img = new Image();
+        let img2 = new Image();
+        let img3 = new Image();
+
+        window.addEventListener('keydown', keyDownListener);
+        function keyDownListener(event) {
+            keyPresses[event.key] = true;
+        }
+
+        window.addEventListener('keyup', keyUpListener);
+        function keyUpListener(event) {
+            keyPresses[event.key] = false;
+        }
+
+        function loadImage() {
+            img.src = "img/sprite_sheet/Green-Cap-Character-16x18.png";
+            img.onload = function() {
+                window.requestAnimationFrame(gameLoop);
+            };
+        }
+
+        function loadImage2() {
+            img2.src = "img/sprite_sheet/Red-Cap-Character-16x18.png";
+            img2.onload = function() {
+                window.requestAnimationFrame(gameLoop);
+            };
+        }
+
+        function loadImage3() {
+            img3.src = "img/sprite_sheet/heart.png";
+            img3.onload = function() {
+                window.requestAnimationFrame(gameLoop);
+            };
+        }
+
+        function drawFrame(frameX, frameY, canvasX, canvasY) {
+        let positionBX  = SCALED_WIDTH+220;
+        let positionBY  = SCALED_HEIGHT+59;
+
+        if(canvasX == positionBX-1 && canvasY ==  positionBY){
+            // Bei Kontakt mach was
+            console.log("canvasaktuell: "+(canvasX+1));
+        }
+        ctx.drawImage(img, frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+                        canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
+
+        ctx.drawImage(img2, 0, 0, 16, 18, positionBX, positionBY, 16 * SCALE, 18*SCALE);
+
+        ctx1.drawImage(img, frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+                        canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
+
+        ctx1.drawImage(img2, 0, 0, 16, 18, positionBX, positionBY, 16 * SCALE, 18*SCALE);
+
+        
+        ctx2.drawImage(img, frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
+                        canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
+
+        ctx2.drawImage(img2, 0, 0, 16, 18, positionBX, positionBY, 16 * SCALE, 18*SCALE);
+        }
+
+        loadImage();
+        loadImage2();
+        loadImage3();
+
+        function moveCharacter(deltaX, deltaY, direction) {
+            if (positionX + deltaX > 0 && positionX + SCALED_WIDTH + deltaX < canvas.width) {
+                positionX += deltaX;
+            }
+            if (positionY + deltaY > 0 && positionY + SCALED_HEIGHT + deltaY < canvas.height) {
+                positionY += deltaY;
+            }
+            currentDirection = direction;
+        }
+
+        function activateMiniGame(Nr) {
+            reset();
+            // Tell Safari not to move the window.
+             GameNr = Nr;
+        }
+
+        function reset(){
+            currentDirection = FACING_DOWN;
+            currentLoopIndex = 0;
+            frameCount = 0;
+            positionX = 0;
+            positionY = 0;
+        }
+
+    switch(GameNr) {
+    	case 1:
+            function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let hasMoved = false;
+
+                if (keyPresses.w) {
+                    moveCharacter(0, -MOVEMENT_SPEED, FACING_UP);
+                    hasMoved = true;
+                } else if (keyPresses.s) {
+                    moveCharacter(0, MOVEMENT_SPEED, FACING_DOWN);
+                    hasMoved = true;
+                }
+
+                if (keyPresses.a) {
+                    moveCharacter(-MOVEMENT_SPEED, 0, FACING_LEFT);
+                    hasMoved = true;
+                } else if (keyPresses.d) {
+                    moveCharacter(MOVEMENT_SPEED, 0, FACING_RIGHT);
+                    hasMoved = true;
+                }
+
+                if (hasMoved) {
+                    frameCount++;
+                    if (frameCount >= FRAME_LIMIT) {
+                    frameCount = 0;
+                    currentLoopIndex++;
+                    if (currentLoopIndex >= CYCLE_LOOP.length) {
+                        currentLoopIndex = 0;
+                    }
+                    }
+                }
+
+                if (!hasMoved) {
+                    currentLoopIndex = 0;
+                }
+
+                drawFrame(CYCLE_LOOP[currentLoopIndex], currentDirection, positionX, positionY);
+                    window.requestAnimationFrame(gameLoop);
+                
+            }
+        break;
+
+        case 2:
+            function gameLoop() {
+                ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+
+                let hasMoved = false;
+
+                    if (keyPresses.w) {
+                        moveCharacter(0, -MOVEMENT_SPEED, FACING_UP);
+                        hasMoved = true;
+                    } else if (keyPresses.s) {
+                        moveCharacter(0, MOVEMENT_SPEED, FACING_DOWN);
+                        hasMoved = true;
+                    }
+
+                    if (keyPresses.a) {
+                        moveCharacter(-MOVEMENT_SPEED, 0, FACING_LEFT);
+                        hasMoved = true;
+                    } else if (keyPresses.d) {
+                        moveCharacter(MOVEMENT_SPEED, 0, FACING_RIGHT);
+                        hasMoved = true;
+                    }
+
+                    if (hasMoved) {
+                        frameCount++;
+                        if (frameCount >= FRAME_LIMIT) {
+                        frameCount = 0;
+                        currentLoopIndex++;
+                        if (currentLoopIndex >= CYCLE_LOOP.length) {
+                            currentLoopIndex = 0;
+                        }
+                        }
+                    }
+
+                    if (!hasMoved) {
+                        currentLoopIndex = 0;
+                    }
+
+                    drawFrame(CYCLE_LOOP[currentLoopIndex], currentDirection, positionX, positionY);
+                        window.requestAnimationFrame(gameLoop);
+                    
+            }
+        break;
+
+        case 3:
+        function gameLoop() {
+                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+                let hasMoved = false;
+
+                    if (keyPresses.w) {
+                        moveCharacter(0, -MOVEMENT_SPEED, FACING_UP);
+                        hasMoved = true;
+                    } else if (keyPresses.s) {
+                        moveCharacter(0, MOVEMENT_SPEED, FACING_DOWN);
+                        hasMoved = true;
+                    }
+
+                    if (keyPresses.a) {
+                        moveCharacter(-MOVEMENT_SPEED, 0, FACING_LEFT);
+                        hasMoved = true;
+                    } else if (keyPresses.d) {
+                        moveCharacter(MOVEMENT_SPEED, 0, FACING_RIGHT);
+                        hasMoved = true;
+                    }
+
+                    if (hasMoved) {
+                        frameCount++;
+                        if (frameCount >= FRAME_LIMIT) {
+                        frameCount = 0;
+                        currentLoopIndex++;
+                        if (currentLoopIndex >= CYCLE_LOOP.length) {
+                            currentLoopIndex = 0;
+                        }
+                        }
+                    }
+
+                    if (!hasMoved) {
+                        currentLoopIndex = 0;
+                    }
+
+                    drawFrame(CYCLE_LOOP[currentLoopIndex], currentDirection, positionX, positionY);
+                        window.requestAnimationFrame(gameLoop);
+                    
+            }
+        break;
+
+        default:
+        // code block
+}
+
+    </script>
+</html>
