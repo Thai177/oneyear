@@ -28,6 +28,7 @@ function BlockMove(event) {
   let positionY = 0;
   let img = new Image();
   let img2 = new Image();
+  let img3 = new Image();
 
   window.addEventListener('keydown', keyDownListener);
   function keyDownListener(event) {
@@ -53,6 +54,13 @@ function BlockMove(event) {
       };
   }
 
+  function loadImage3() {
+    img3.src = "img/sprite_sheet/MiniGame1/heart.png";
+    img3.onload = function() {
+        window.requestAnimationFrame(gameLoop);
+    };
+}
+
   function openMiniGame2(){
     var M3 = document.getElementById("M3");
     var M4 = document.getElementById("M4");
@@ -66,6 +74,7 @@ function BlockMove(event) {
   if(canvasX == positionBX-5 && canvasY ==  positionBY-4){
       // Bei Kontakt mach was
       console.log("canvasaktuell: "+(canvasX+1));
+      ctx.drawImage(img3, 0, 0, 16, 18, positionBX-2, positionBY-40, 16 * SCALE, 18*SCALE);
       openMiniGame2();
   }
   ctx.drawImage(img, frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
@@ -77,6 +86,7 @@ function BlockMove(event) {
 
   loadImage();
   loadImage2();
+  loadImage3();
 
   function moveCharacter(deltaX, deltaY, direction) {
       if (positionX + deltaX > 0 && positionX + SCALED_WIDTH + deltaX < canvas.width) {
